@@ -26,6 +26,7 @@ public class VoiceManager : Singleton<VoiceManager>
     private void CreateNewRecognizer()
     {
         //create new recognizer
+        _recognizer?.Dispose();
         if (Actions.GetAllVoiceInputs().Count > 0)
         {
             _recognizer = new KeywordRecognizer(Actions.GetAllTriggers(), ConfidenceLevel.Low);

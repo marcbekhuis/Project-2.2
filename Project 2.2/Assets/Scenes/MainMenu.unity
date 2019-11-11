@@ -265,7 +265,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Options
+  m_Text: Settings
 --- !u!222 &931519557
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -423,8 +423,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3725105d17bfadc4ab97b0f83f5b81df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  voiceCommandName: aap
-  voiceCommandtrigger: aap
+  voiceCommandName: settings
+  voiceCommandtrigger: settings
   OnCommandTrigger:
     m_PersistentCalls:
       m_Calls: []

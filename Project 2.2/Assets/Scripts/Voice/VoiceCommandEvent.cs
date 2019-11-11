@@ -12,10 +12,12 @@ public class VoiceCommandEvent : MonoBehaviour
 
     private string _lastName = "";
     private string _lastTrigger = "";
-    
+    private VoiceManager.VoiceInput CommandInUse;
+
     private void Start()
     {
-        VoiceManager.Instance.AddVoiceCommand(voiceCommandName, voiceCommandtrigger, () => {OnCommandTrigger.Invoke(); });
+        UpdateCommandInUse();
+        VoiceManager.Instance.AddVoiceCommand(CommandInUse);
     }
 
     private void OnValidate()
@@ -35,5 +37,25 @@ public class VoiceCommandEvent : MonoBehaviour
 
         _lastName = voiceCommandName;
         _lastTrigger = voiceCommandtrigger;
+    }
+
+    private void OnDisable()
+    {
+        VoiceManager.Instance.RemoveVoiceCommand(CommandInUse);
+    }
+
+    private void OnDestroy()
+    {
+        VoiceManager.Instance?.RemoveVoiceCommand(CommandInUse);
+    }
+
+    private void UpdateCommandInUse()
+    {
+        CommandInUse = new VoiceManager.VoiceInput()
+        {
+            name = voiceCommandName,
+            trigger = voiceCommandtrigger,
+            action = () => { OnCommandTrigger.Invoke(); }
+        };
     }
 }
