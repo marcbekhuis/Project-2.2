@@ -44,6 +44,11 @@ public class VoiceCommandEvent : MonoBehaviour
         VoiceManager.Instance.RemoveVoiceCommand(CommandInUse);
     }
 
+    private void OnEnable()
+    {
+        VoiceManager.Instance.AddVoiceCommand(CommandInUse);
+    }
+
     private void OnDestroy()
     {
         VoiceManager.Instance?.RemoveVoiceCommand(CommandInUse);

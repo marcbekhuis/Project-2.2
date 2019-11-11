@@ -37,7 +37,7 @@ public class VoiceManager : Singleton<VoiceManager>
 
     private void OnKeywordsRecognized(PhraseRecognizedEventArgs args)
     {
-        Debug.Assert(debugMode, "Command: " + args.text + ": Confidence " + args.confidence + ": time" + 
+        Debug.Log("Command: " + args.text + ": Confidence " + args.confidence + ": time" + 
                                  args.phraseStartTime.ToString());
         Actions.GetVoiceInput(args.text).action?.Invoke();
     }
