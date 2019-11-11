@@ -774,6 +774,7 @@ GameObject:
   m_Component:
   - component: {fileID: 458138350}
   - component: {fileID: 458138351}
+  - component: {fileID: 458138352}
   m_Layer: 5
   m_Name: Levels
   m_TagString: Untagged
@@ -842,6 +843,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &458138352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 458138349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b9d9df5d51c6a840a4f642578851093, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &626209376
 GameObject:
   m_ObjectHideFlags: 0
@@ -1685,7 +1698,18 @@ MonoBehaviour:
   voiceCommandtrigger: Level one
   OnCommandTrigger:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 458138352}
+        m_MethodName: OpenLevel
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: level01
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1114863621
 GameObject:
   m_ObjectHideFlags: 0
@@ -3110,7 +3134,18 @@ MonoBehaviour:
   voiceCommandtrigger: Level Two
   OnCommandTrigger:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 458138352}
+        m_MethodName: OpenLevel
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: level01
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2123196235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3204,7 +3239,18 @@ MonoBehaviour:
   voiceCommandtrigger: Level Three
   OnCommandTrigger:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 458138352}
+        m_MethodName: OpenLevel
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: level01
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2140292394
 MonoBehaviour:
   m_ObjectHideFlags: 0
