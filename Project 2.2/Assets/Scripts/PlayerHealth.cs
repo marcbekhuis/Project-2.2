@@ -34,6 +34,10 @@ public class PlayerHealth : MonoBehaviour
         for (int i = 0; i < amount; i++)
         {
             RemoveHealthIcon();
+            if (health <= 0)
+            {
+                Died();
+            }
         }
     }
 
@@ -47,5 +51,10 @@ public class PlayerHealth : MonoBehaviour
         GameObject healthIconTemp = healthIcons[healthIcons.Count];
         healthIcons.RemoveAt(healthIcons.Count);
         Destroy(healthIconTemp);
+    }
+
+    private void Died()
+    {
+
     }
 }
