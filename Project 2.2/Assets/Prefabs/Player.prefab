@@ -356,8 +356,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerState: 1
   runningSpeed: 1
-  walkingSpeed: 0.5
-  jumpForce: 3
+  walkingSpeed: 2.5
+  jumpForce: 8
   layerMask:
     serializedVersion: 2
     m_Bits: 256
