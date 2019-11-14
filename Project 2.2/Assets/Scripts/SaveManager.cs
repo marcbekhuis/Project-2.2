@@ -92,6 +92,12 @@ public class SaveManager : Singleton<SaveManager>
         }
     }
 
+    public void CreateNewJson()
+    {
+        _saveFile.SaveFileVersion = "";
+        CreateNewFile(levels);
+    }
+    
     private SaveFile.Level GetLevel(string levelName)
     {
         try
@@ -183,6 +189,7 @@ public class SaveManager : Singleton<SaveManager>
         [System.Flags]
         public enum MiniGames
         {
+            None = 0,
             SkyLanders = 1
         }
         

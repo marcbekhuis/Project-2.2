@@ -26,6 +26,11 @@ public class SaveManagerEditor : Editor
             {
                 saveManager.LoadSettings();
             }
+
+            if (GUILayout.Button("Create New json"))
+            {
+                saveManager.CreateNewJson();
+            }
             if (GUILayout.Button("show Json"))
             {
                 Process.Start("notepad.exe", saveManager.SaveFilePath);
