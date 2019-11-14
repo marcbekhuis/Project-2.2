@@ -199,6 +199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b9d9df5d51c6a840a4f642578851093, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelName: 
 --- !u!1 &515009806
 GameObject:
   m_ObjectHideFlags: 0
@@ -13232,5 +13233,30 @@ PrefabInstance:
       propertyPath: openSceneScript
       value: 
       objectReference: {fileID: 385240516}
+    - target: {fileID: 3164250615538768930, guid: c9e812a7fcd2880498b0c1c2e2b7ec84,
+        type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0.48006406
+      objectReference: {fileID: 0}
+    - target: {fileID: 3164250615538768930, guid: c9e812a7fcd2880498b0c1c2e2b7ec84,
+        type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0.80388623
+      objectReference: {fileID: 0}
+    - target: {fileID: 3164250615538768930, guid: c9e812a7fcd2880498b0c1c2e2b7ec84,
+        type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0.8773585
+      objectReference: {fileID: 0}
+    - target: {fileID: 3164250615538768930, guid: c9e812a7fcd2880498b0c1c2e2b7ec84,
+        type: 3}
+      propertyPath: m_BackGroundColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3164250615538768930, guid: c9e812a7fcd2880498b0c1c2e2b7ec84,
+        type: 3}
+      propertyPath: m_ClearFlags
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9e812a7fcd2880498b0c1c2e2b7ec84, type: 3}
