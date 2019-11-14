@@ -8,8 +8,17 @@ public class LevelScore : Singleton<LevelScore>
 {
     [SerializeField] private Text scoreText;
     private int score = 0;
+
+    public int Score
+    {
+        get { return score; }
+    }
     public string playerName;
 
+    public void SetPlayerName(string name)
+    {
+        playerName = name;
+    }
     private void Start()
     {
         UpdateUI();
@@ -36,7 +45,7 @@ public class LevelScore : Singleton<LevelScore>
             PlayedMiniGames = SaveManager.SaveFile.MiniGames.None,
             PlayerTime = Time.timeSinceLevelLoad
         };
-
+Debug.Log(playerStats.ToString());
         Debug.Log(SaveManager.Instance.AddScoreToLevel(playerStats)); //ToDO kip eten 
     }
 }

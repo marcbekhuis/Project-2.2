@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private GameObject healthIcon;
     [SerializeField] private Transform healthBar;
     [SerializeField] private OpenSceneScript openSceneScript;
+    public UnityEvent onPlayerdied = new UnityEvent();
 
     private List<GameObject> healthIcons = new List<GameObject>();
 
@@ -57,7 +59,8 @@ public class PlayerHealth : MonoBehaviour
     private void Died()
     {
         Camera.main.transform.parent = null;
-        Destroy(gameObject);
-        openSceneScript.OpenLevel("MainMenu");
+        onPlayerdied.Invoke();
+        //Destroy(gameObject);
+        //openSceneScript.OpenLevel("MainMenu");
     }
 }

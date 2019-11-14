@@ -39,7 +39,7 @@ public class LevelUI : MonoBehaviour
             for (var i = 0; i < highScoreText.Length; i++) highScoreText[i].text = "";
             for (var i = 0; i < Mathf.Min(3, scores.Count); i++)
                 highScoreText[i].text =
-                    $@"1e: {scores[i].PlayerName.Truncate(playerNameLength)}, Score: {scores[i].PlayerScore}";
+                    $@"{i +1 }e: {scores[i].PlayerName.Truncate(playerNameLength)}, Score: {scores[i].PlayerScore}";
         }
     }
 
@@ -50,7 +50,12 @@ public class LevelUI : MonoBehaviour
         //Debug.Log(level.LevelName);
         var tempscores = SaveManager.Instance.GetScoresPerLevel(level);
         //Debug.Log(tempscores);
-        if (tempscores?.Count > 0) scores = tempscores.OrderBy(x => x.PlayerScore).ToList();
+        if (tempscores?.Count > 0)
+        {
+            scores = tempscores.OrderBy(x => x.PlayerScore * -1).ThenBy(x => x.PlayerTime * -1).ToList();
+            //Debug.Log(scores[0].PlayerName);
+        }
+
         voiceCommand.voiceCommandName = level.LevelName;
         voiceCommand.voiceCommandtrigger = level.LevelName;
         voiceCommand.UpdateCommand();

@@ -117,6 +117,7 @@ public class SaveManager : Singleton<SaveManager>
         try
         {
             SaveData.levels.Add(level);
+            SaveSettings();
             return true;
         }
         catch (Exception e)
@@ -128,7 +129,10 @@ public class SaveManager : Singleton<SaveManager>
 
     private bool RemoveLevel(string levelName)
     {
-        return SaveData.levels.Remove(GetLevel(levelName));
+        var a = SaveData.levels.Remove(GetLevel(levelName));
+        SaveSettings();
+        return a;
+
     }
 
     public void UnLockLevel(string levelName)
@@ -138,6 +142,7 @@ public class SaveManager : Singleton<SaveManager>
         if (level.Equals(ERRORLEVEL)) return;
         level.Unlocked = true;
         AddLevel(level);
+        SaveSettings();
     }
 
     public bool AddScoreToLevel(SaveFile.PlayerStats score)
@@ -145,6 +150,7 @@ public class SaveManager : Singleton<SaveManager>
         try
         {
             SaveData.PlayerStatses.Add(score);
+            SaveSettings();
             return true;
         }
         catch (Exception e)
@@ -155,14 +161,14 @@ public class SaveManager : Singleton<SaveManager>
 
     public SaveFile.Level GetLevel(int levelIndex)
     {
-        if (!(levelIndex < levels.Length))
+        if (!(levelIndex < _saveFile.levels.Count))
         {
             //Debug.LogError("Error " + levelIndex);
             return ERRORLEVEL;
         }
         
 
-        return GetLevel(levels[levelIndex]);
+        return GetLevel(_saveFile.levels[levelIndex].LevelName);
     }
 
     public List<SaveFile.PlayerStats> GetScoresPerLevel(SaveFile.Level level)
