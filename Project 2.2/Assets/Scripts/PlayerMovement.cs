@@ -60,10 +60,8 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
     public void Jump()
     {
-        Debug.Log("Trying to jumping");
-        if (playerState != PlayerState.Jumping)
+        if (playerState != PlayerState.Jumping && playerState != PlayerState.Falling)
         {
-            Debug.Log("Jumping");
             rigidbody2D.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
             playerState = PlayerState.Jumping;
         }

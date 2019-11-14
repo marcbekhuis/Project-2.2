@@ -7,6 +7,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private int health = 3;
     [SerializeField] private GameObject healthIcon;
     [SerializeField] private Transform healthBar;
+    [SerializeField] private OpenSceneScript openSceneScript;
 
     private List<GameObject> healthIcons = new List<GameObject>();
 
@@ -37,14 +38,6 @@ public class PlayerHealth : MonoBehaviour
             if (health <= 0)
             {
                 Died();
-                
-
-
-
-
-
-
-
             }
         }
     }
@@ -65,5 +58,6 @@ public class PlayerHealth : MonoBehaviour
     {
         Camera.main.transform.parent = null;
         Destroy(gameObject);
+        openSceneScript.OpenLevel("MainMenu");
     }
 }
