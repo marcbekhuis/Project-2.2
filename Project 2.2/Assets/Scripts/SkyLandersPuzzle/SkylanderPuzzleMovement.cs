@@ -10,14 +10,6 @@ public class SkylanderPuzzleMovement : MonoBehaviour
 
     private SkylanderPuzzleBoard skylanderPuzzleBoard;
 
-    private enum Rotations
-    {
-        top,
-        Left,
-        Bottom,
-        Right
-    }
-
     // Start is called before the first frame update
     void Start()
     {
@@ -160,5 +152,13 @@ public class SkylanderPuzzleMovement : MonoBehaviour
         {
             skylanderPuzzleBoard.board[x, y] = 'O';
         }
+    }
+
+    private enum Rotations
+    {
+        top,
+        Left,
+        Bottom,
+        Right
     }
 }

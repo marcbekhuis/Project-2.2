@@ -4,11 +4,12 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class EnemyPatrol : MonoBehaviour
 {
-    public float diraction, moveSpeed;
+    public bool checkBottom = true;
     [SerializeField] private Vector2 checkOffset;
+    public float diraction, moveSpeed;
     [SerializeField] private float distance;
     [SerializeField] private new Rigidbody2D rigidbody2D;
-    public bool checkBottom = true;
+
     private void Reset()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();

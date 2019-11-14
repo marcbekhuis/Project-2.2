@@ -7,17 +7,21 @@ public class SkylanderPuzzleBoard : MonoBehaviour
 {
     public char[,] board;
     public RectTransform[,] boardGameObjects;
-    public RectTransform placedPlayer;
-    public Dictionary<RectTransform, Vector2Int> movables = new Dictionary<RectTransform, Vector2Int>();
-    [Space]
-    [SerializeField] private string[] inputBoard;
-    [SerializeField] private GameObject wall;
-    [SerializeField] private GameObject floor;
-    [SerializeField] private GameObject end;
-    [SerializeField] private GameObject player;
+
     [Space]
     [SerializeField] private RectTransform boardParent;
+
+    [SerializeField] private GameObject end;
+    [SerializeField] private GameObject floor;
+
+    [Space]
+    [SerializeField] private string[] inputBoard;
+
+    public Dictionary<RectTransform, Vector2Int> movables = new Dictionary<RectTransform, Vector2Int>();
+    public RectTransform placedPlayer;
+    [SerializeField] private GameObject player;
     [SerializeField] private RectTransform playerParent;
+    [SerializeField] private GameObject wall;
 
     // Start is called before the first frame update
     void Start()

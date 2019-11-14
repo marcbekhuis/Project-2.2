@@ -10,6 +10,7 @@ public static partial class Extensions
     {
         MonoBehaviour.Destroy(t);
     }
+
     public static void Destroy(this Transform t)
     {
         MonoBehaviour.Destroy(t.gameObject);
@@ -19,10 +20,12 @@ public static partial class Extensions
     {
         MonoBehaviour.Destroy(t);
     }
+
     public static void Disable<T>(this T t) where T : MonoBehaviour
     {
         t.enabled = false;
     }
+
     public static void Enable<T>(this T t) where T : MonoBehaviour
     {
         t.enabled = true;
@@ -32,6 +35,7 @@ public static partial class Extensions
     {
         return MonoBehaviour.Instantiate(t);
     }
+
     public static GameObject Instantiate(this Transform t)
     {
         return Instantiate(t.gameObject);
@@ -61,7 +65,6 @@ public static partial class Extensions
         t.localScale = Vector3.one;
     }
 
- 
 
     // Spriterenderer
     public static void SetColor(this SpriteRenderer spriteRenderer, Color color)
@@ -84,7 +87,7 @@ public static partial class Extensions
     {
         t.text = text;
     }
-    
+
     //C# string 
     public static string Truncate(this string value, int maxLength)
     {

@@ -9,12 +9,15 @@ using UnityEngine.Windows.Speech;
 public class VoiceManager : Singleton<VoiceManager>
 {
     private KeywordRecognizer _recognizer;
+
     // Dictionary<string, Action> _actions = new Dictionary<string, Action>();
     protected VoiceInputList Actions = new VoiceInputList();
-    
+
     public bool debugMode;
 
-    
+    public UnityEvent onRecognizerFailed = new UnityEvent();
+
+
     private IEnumerator Start()
     {
         yield return new WaitForEndOfFrame();
@@ -26,12 +29,21 @@ public class VoiceManager : Singleton<VoiceManager>
     {
         //create new recognizer
         _recognizer?.Dispose();
-        if (Actions.GetAllVoiceInputs().Count > 0)
+        try
         {
-            _recognizer = new KeywordRecognizer(Actions.GetAllTriggers(), ConfidenceLevel.Low);
-            _recognizer.OnPhraseRecognized += OnKeywordsRecognized;
-            _recognizer.Start();
+            if (Actions.GetAllVoiceInputs().Count > 0)
+            {
+                _recognizer = new KeywordRecognizer(Actions.GetAllTriggers(), ConfidenceLevel.Low);
+                _recognizer.OnPhraseRecognized += OnKeywordsRecognized;
+                _recognizer.Start();
+            }
         }
+        catch (Exception e)
+        {
+            onRecognizerFailed.Invoke();
+            throw;
+        }
+
     }
 
     private void OnKeywordsRecognized(PhraseRecognizedEventArgs args)
@@ -45,21 +57,22 @@ public class VoiceManager : Singleton<VoiceManager>
     {
     Actions.Add(name, trigger, action);
     }
-    
+
     public void AddVoiceCommand(string name, Action action)
     {
         Actions.Add(name, action);
     }
-        
+
     public void AddVoiceCommand(VoiceInput voiceInput)
     {
         Actions.Add(voiceInput);
     }
-    
+
     public bool RemoveVoiceCommand(VoiceInput voiceInput)
     {
         return Actions.Remove(voiceInput);
     }
+
     public bool RemoveVoiceCommand(string name)
     {
         return Actions.Remove(name);
@@ -97,7 +110,9 @@ public class VoiceManager : Singleton<VoiceManager>
         Actions.Add(voiceCommand);
         return true;
     }
+
     
+
     public struct VoiceInput
     {
         public string name;
@@ -108,6 +123,7 @@ public class VoiceManager : Singleton<VoiceManager>
     protected class VoiceInputList
     {
         private Dictionary<string ,VoiceInput> _voiceInputs = new Dictionary<string, VoiceInput>();
+        public UnityEvent OnListChanged = new UnityEvent();
 
         public void Add(VoiceInput voiceInput)
         {
@@ -173,6 +189,5 @@ public class VoiceManager : Singleton<VoiceManager>
             };
             Add(newAction);
         }
-        public UnityEvent OnListChanged = new UnityEvent();
     }
 }

@@ -10,8 +10,19 @@ using UnityEngine.Serialization;
 
 public class SaveManager : Singleton<SaveManager>
 {
-    public string[] levels;
     private string _scorePath;
+    public string[] levels;
+
+    [SerializeField] private SaveFile _saveFile;
+    public readonly SaveFile.Level ERRORLEVEL;
+    public SaveManager()
+    {
+        ERRORLEVEL = new SaveFile.Level()
+        {
+            LevelName = "ERROR",
+            Unlocked = false
+        };
+    }
 
     public SaveFile SaveData
     {
@@ -22,75 +33,19 @@ public class SaveManager : Singleton<SaveManager>
             SaveSettings();
         }
     }
-    [SerializeField]private SaveFile _saveFile;
-    private readonly SaveFile.Level ERRORLEVEL;
 
     public string SaveFilePath
     {
         get { return _scorePath; }
     }
 
-    [Serializable]
-    public struct SaveFile
-    {
-        public string SaveFileVersion;
-        public bool EnableTutorial;
-        public bool IsFirstTime;
-        public List<Level> levels;
-        public List<PlayerStats> PlayerStatses;
-        [System.Flags]
-        public enum MiniGames
-        {
-            SkyLanders = 1
-        }
-        
-        public SaveFile(string[] _levels)
-        {
-            levels = new List<Level>();
-            for (int levelIndex = 0; levelIndex < _levels.Length; levelIndex++)
-            {
-                levels.Add(new Level(){LevelName = _levels[levelIndex], Unlocked = (levelIndex == 0 ? true : false)});
-            }
-            SaveFileVersion = "0.0.1";
-            EnableTutorial = true;
-            IsFirstTime = true;
-            PlayerStatses = new List<PlayerStats>();
-        }
-
-        [Serializable]
-        public struct Level
-        {
-            public string LevelName;
-            public bool Unlocked;
-            public MiniGames MiniGames; 
-        }
-        [Serializable]
-        public struct PlayerStats
-        {
-            public string PlayerName;
-            public double PlayerTime;
-            public int PlayerScore;
-            public MiniGames PlayedMiniGames;
-            public string Level;
-        }
-    }
-
-    public SaveManager()
-    {
-        ERRORLEVEL = new SaveFile.Level()
-        {
-            LevelName = "ERROR",
-            Unlocked = false
-        };
-    }
-    
     private void Awake()
     {
         _scorePath = Application.persistentDataPath + "/Score.bat";
         DontDestroyOnLoad(this);
         LoadSettings();
     }
-    
+
     public void LoadSettings()
     {
         if (File.Exists(_scorePath))
@@ -99,7 +54,7 @@ public class SaveManager : Singleton<SaveManager>
             {
                 using (var file = new StreamReader(File.OpenRead(_scorePath)))
                 {
-                    JsonUtility.FromJsonOverwrite(file.ReadToEnd(), SaveData);
+                    _saveFile = JsonUtility.FromJson<SaveFile>(file.ReadToEnd());
                 }
             }
             catch (Exception e)
@@ -196,14 +151,14 @@ public class SaveManager : Singleton<SaveManager>
     {
         if (!(levelIndex < levels.Length))
         {
-            Debug.LogError("Error " + levelIndex);
+            //Debug.LogError("Error " + levelIndex);
             return ERRORLEVEL;
         }
         
 
         return GetLevel(levels[levelIndex]);
     }
-    
+
     public List<SaveFile.PlayerStats> GetScoresPerLevel(SaveFile.Level level)
     {
         if(level.LevelName == ERRORLEVEL.LevelName)
@@ -211,10 +166,54 @@ public class SaveManager : Singleton<SaveManager>
         var playerstats = SaveData.PlayerStatses.Where(stats => stats.Level == level.LevelName);
         return playerstats.ToList();
     }
+
     public List<SaveFile.PlayerStats> GetScoresPerLevel(string level)
     {
         return GetScoresPerLevel(GetLevel(level));
     }
-    
-    
+
+    [Serializable]
+    public struct SaveFile
+    {
+        public string SaveFileVersion;
+        public bool EnableTutorial;
+        public bool IsFirstTime;
+        public List<Level> levels;
+        public List<PlayerStats> PlayerStatses;
+        [System.Flags]
+        public enum MiniGames
+        {
+            SkyLanders = 1
+        }
+        
+        public SaveFile(string[] _levels)
+        {
+            levels = new List<Level>();
+            for (int levelIndex = 0; levelIndex < _levels.Length; levelIndex++)
+            {
+                levels.Add(new Level(){LevelName = _levels[levelIndex], Unlocked = (levelIndex == 0 ? true : false)});
+            }
+            SaveFileVersion = "0.0.1";
+            EnableTutorial = true;
+            IsFirstTime = true;
+            PlayerStatses = new List<PlayerStats>();
+        }
+
+        [Serializable]
+        public struct Level
+        {
+            public string LevelName;
+            public bool Unlocked;
+            public MiniGames MiniGames; 
+        }
+        [Serializable]
+        public struct PlayerStats
+        {
+            public string PlayerName;
+            public double PlayerTime;
+            public int PlayerScore;
+            public MiniGames PlayedMiniGames;
+            public string Level;
+        }
+    }
 }

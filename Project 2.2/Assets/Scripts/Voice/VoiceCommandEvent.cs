@@ -6,14 +6,13 @@ using UnityEngine.Events;
 
 public class VoiceCommandEvent : MonoBehaviour
 {
-    public string voiceCommandName = "";
-    public string voiceCommandtrigger = "";
-    public UnityEvent OnCommandTrigger = new UnityEvent();
-
     private string _lastName = "";
     private string _lastTrigger = "";
     private VoiceManager.VoiceInput CommandInUse;
     private bool IsActive = false;
+    public UnityEvent OnCommandTrigger = new UnityEvent();
+    public string voiceCommandName = "";
+    public string voiceCommandtrigger = "";
 
     private void OnValidate()
     {
@@ -36,7 +35,11 @@ public class VoiceCommandEvent : MonoBehaviour
 
     private void OnDisable()
     {
-        VoiceManager.Instance?.RemoveVoiceCommand(CommandInUse);
+        if (!VoiceManager.IsInstanceNull)
+        {
+            VoiceManager.GetInstanceIfNotNull.RemoveVoiceCommand(CommandInUse);
+        }
+        
         IsActive = false;
     }
 
@@ -53,16 +56,50 @@ public class VoiceCommandEvent : MonoBehaviour
 
     private void OnDestroy()
     {
-        VoiceManager.Instance?.RemoveVoiceCommand(CommandInUse);
+        if (!VoiceManager.IsInstanceNull)
+        {
+            VoiceManager.GetInstanceIfNotNull.RemoveVoiceCommand(CommandInUse);
+        }
+       
     }
 
     private void UpdateCommandInUse()
     {
+        if (voiceCommandName == SaveManager.Instance.ERRORLEVEL.LevelName)
+        {
+            var a = SaveManager.Instance.ERRORLEVEL;
+            CommandInUse = new VoiceManager.VoiceInput()
+            {
+                action = null,
+                name = a.LevelName,
+                trigger = a.LevelName
+            };
+            return;
+        }
         CommandInUse = new VoiceManager.VoiceInput()
         {
             name = voiceCommandName,
             trigger = voiceCommandtrigger,
             action = () => { OnCommandTrigger.Invoke(); }
         };
+    }
+
+    public void UpdateCommand()
+    {
+        try
+        {
+            VoiceManager.Instance.RemoveVoiceCommand(CommandInUse);
+            UpdateCommandInUse();
+            if (CommandInUse.name == "ERROR")
+            {
+                return;
+            }
+            VoiceManager.Instance.AddVoiceCommand(CommandInUse);
+        }
+        catch (Exception e)
+        {
+            throw;
+        }
+
     }
 }

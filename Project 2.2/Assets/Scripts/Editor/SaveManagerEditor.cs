@@ -35,5 +35,4 @@ public class SaveManagerEditor : Editor
         
         base.OnInspectorGUI();
     }
-
 }
