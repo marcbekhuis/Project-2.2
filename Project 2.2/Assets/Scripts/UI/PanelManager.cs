@@ -9,7 +9,7 @@ public class PanelManager : MonoBehaviour
     public GameObject StartingPanel;
 
 
-    private void Start()
+    private void Awake()
     {
         SetPanel(StartingPanel);
     }

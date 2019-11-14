@@ -37,6 +37,6 @@ public class LevelScore : Singleton<LevelScore>
             PlayerTime = Time.timeSinceLevelLoad
         };
 
-        SaveManager.Instance.AddScoreToLevel(playerStats);
+        Debug.Log(SaveManager.Instance.AddScoreToLevel(playerStats)); //ToDO kip eten 
     }
 }

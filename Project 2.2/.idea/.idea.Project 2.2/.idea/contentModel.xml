@@ -8,12 +8,37 @@
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="Scripts" t="Include">
+          <e p="ActivateTutorial.cs" t="Include" />
+          <e p="Coin.cs" t="Include" />
+          <e p="Dalayer.cs" t="Include" />
+          <e p="DamagingObject.cs" t="Include" />
           <e p="Editor" t="Include">
+            <e p="LevelUIEditor.cs" t="Include" />
+            <e p="SaveManagerEditor.cs" t="Include" />
             <e p="VoiceManagerEditor.cs" t="Include" />
           </e>
+          <e p="enemys" t="Include">
+            <e p="EnemyPatrol.cs" t="Include" />
+          </e>
           <e p="Extensions.cs" t="Include" />
+          <e p="LevelScore.cs" t="Include" />
+          <e p="OpenSceneScript.cs" t="Include" />
+          <e p="PlayerHealth.cs" t="Include" />
+          <e p="PlayerMovement.cs" t="Include" />
+          <e p="QuitScript.cs" t="Include" />
           <e p="RemoveMouse.cs" t="Include" />
+          <e p="SaveManager.cs" t="Include" />
           <e p="Singleton.cs" t="Include" />
+          <e p="SkyLandersPuzzle" t="Include">
+            <e p="SkylanderPuzzleBoard.cs" t="Include" />
+            <e p="SkylanderPuzzleMovement.cs" t="Include" />
+          </e>
+          <e p="TutorialMainMenu.cs" t="Include" />
+          <e p="UI" t="Include">
+            <e p="LevelsUI.cs" t="Include" />
+            <e p="LevelUI.cs" t="Include" />
+            <e p="PanelManager.cs" t="Include" />
+          </e>
           <e p="Voice" t="Include">
             <e p="VoiceCommandEvent.cs" t="Include" />
             <e p="VoiceManager.cs" t="Include" />
