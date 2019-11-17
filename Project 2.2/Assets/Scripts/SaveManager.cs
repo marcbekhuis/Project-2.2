@@ -86,6 +86,11 @@ public class SaveManager : Singleton<SaveManager>
     private void CreateNewFile(string[] levels)
     {
         SaveData = new SaveFile(levels);
+        if (levels.Length == 0)
+        {
+            levels = new string[1];
+            levels[0] = "level 01";
+        }
         using (var file = new StreamWriter(File.Create(_scorePath)))
         {
             file.WriteLine(JsonUtility.ToJson(SaveData));
